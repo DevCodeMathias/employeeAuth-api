@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.application.service;
+package com.devBackend.employeeAuth.application.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,12 +8,12 @@ import static org.mockito.Mockito.when;
 
 import java.util.Optional;
 
-import com.devBackend.employAuth.application.dto.LoginRequest;
-import com.devBackend.employAuth.application.interfaces.IJwtService;
-import com.devBackend.employAuth.domain.entity.Employees;
-import com.devBackend.employAuth.domain.exception.InvalidCredentialsException;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
-import com.devBackend.employAuth.infrastructure.repository.EmployeeRepository;
+import com.devBackend.employeeAuth.application.dto.LoginRequest;
+import com.devBackend.employeeAuth.application.interfaces.IJwtService;
+import com.devBackend.employeeAuth.domain.entity.Employees;
+import com.devBackend.employeeAuth.domain.exception.InvalidCredentialsException;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

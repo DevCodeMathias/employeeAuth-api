@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.domain.entity;
+package com.devBackend.employeeAuth.domain.entity;
 
 public class Employees {
 

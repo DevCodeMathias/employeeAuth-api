@@ -1,14 +1,14 @@
-package com.devBackend.employAuth.controller;
+package com.devBackend.employeeAuth.controller;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devBackend.employAuth.application.interfaces.IAuthService;
-import com.devBackend.employAuth.application.dto.LoginRequest;
-import com.devBackend.employAuth.application.dto.TokenResponse;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.application.interfaces.IAuthService;
+import com.devBackend.employeeAuth.application.dto.LoginRequest;
+import com.devBackend.employeeAuth.application.dto.TokenResponse;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
 
 import jakarta.validation.Valid;
 

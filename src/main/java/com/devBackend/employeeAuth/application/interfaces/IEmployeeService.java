@@ -1,6 +1,6 @@
-package com.devBackend.employAuth.application.interfaces;
+package com.devBackend.employeeAuth.application.interfaces;
 
-import com.devBackend.employAuth.application.dto.EmployeeRequest;
+import com.devBackend.employeeAuth.application.dto.EmployeeRequest;
 
 public interface IEmployeeService {
 

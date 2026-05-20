@@ -1,7 +1,7 @@
-package com.devBackend.employAuth.application.interfaces;
+package com.devBackend.employeeAuth.application.interfaces;
 
-import com.devBackend.employAuth.application.dto.LoginRequest;
-import com.devBackend.employAuth.application.dto.TokenResponse;
+import com.devBackend.employeeAuth.application.dto.LoginRequest;
+import com.devBackend.employeeAuth.application.dto.TokenResponse;
 
 public interface IAuthService {
 

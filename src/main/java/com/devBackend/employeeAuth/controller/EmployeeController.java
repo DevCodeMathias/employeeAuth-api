@@ -1,6 +1,6 @@
-package com.devBackend.employAuth.controller;
+package com.devBackend.employeeAuth.controller;
 
-import com.devBackend.employAuth.application.dto.EmployeeRequest;
+import com.devBackend.employeeAuth.application.dto.EmployeeRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.devBackend.employAuth.application.interfaces.IEmployeeService;
+import com.devBackend.employeeAuth.application.interfaces.IEmployeeService;
 
 import jakarta.validation.Valid;
 

@@ -1,12 +1,12 @@
-package com.devBackend.employAuth.infrastructure.repository;
+package com.devBackend.employeeAuth.infrastructure.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-import com.devBackend.employAuth.domain.entity.Employees;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.domain.entity.Employees;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
 
 public interface EmployeeRepository extends MongoRepository<Envelope<Employees>, String> {
 

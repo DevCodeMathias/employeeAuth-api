@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.domain.types;
+package com.devBackend.employeeAuth.domain.types;
 
 public enum AuthorizationType {
     EMPLOYEE

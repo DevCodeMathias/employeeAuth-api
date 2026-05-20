@@ -1,13 +1,13 @@
-package com.devBackend.employAuth.application.security;
+package com.devBackend.employeeAuth.application.security;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.charset.StandardCharsets;
 
-import com.devBackend.employAuth.domain.entity.Employees;
-import com.devBackend.employAuth.domain.types.AuthorizationType;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.domain.entity.Employees;
+import com.devBackend.employeeAuth.domain.types.AuthorizationType;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.junit.jupiter.api.Test;

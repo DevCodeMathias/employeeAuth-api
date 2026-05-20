@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.application.dto;
+package com.devBackend.employeeAuth.application.dto;
 
 public record TokenResponse(
         String accessToken) {

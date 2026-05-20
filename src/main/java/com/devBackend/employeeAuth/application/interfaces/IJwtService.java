@@ -1,7 +1,7 @@
-package com.devBackend.employAuth.application.interfaces;
+package com.devBackend.employeeAuth.application.interfaces;
 
-import com.devBackend.employAuth.domain.entity.Employees;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.domain.entity.Employees;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
 
 public interface IJwtService {
 

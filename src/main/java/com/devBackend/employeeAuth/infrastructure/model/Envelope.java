@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.infrastructure.model;
+package com.devBackend.employeeAuth.infrastructure.model;
 
 import java.time.LocalDateTime;
 

@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.infrastructure.exception;
+package com.devBackend.employeeAuth.infrastructure.exception;
 
 import java.time.LocalDateTime;
 import java.util.Map;

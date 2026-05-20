@@ -1,14 +1,14 @@
-package com.devBackend.employAuth.application.service;
+package com.devBackend.employeeAuth.application.service;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.devBackend.employAuth.domain.entity.Employees;
-import com.devBackend.employAuth.application.interfaces.IEmployeeService;
-import com.devBackend.employAuth.application.dto.EmployeeRequest;
-import com.devBackend.employAuth.domain.exception.EmployeeAlreadyRegisteredException;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
-import com.devBackend.employAuth.infrastructure.repository.EmployeeRepository;
+import com.devBackend.employeeAuth.domain.entity.Employees;
+import com.devBackend.employeeAuth.application.interfaces.IEmployeeService;
+import com.devBackend.employeeAuth.application.dto.EmployeeRequest;
+import com.devBackend.employeeAuth.domain.exception.EmployeeAlreadyRegisteredException;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

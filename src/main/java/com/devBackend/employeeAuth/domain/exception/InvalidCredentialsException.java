@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.domain.exception;
+package com.devBackend.employeeAuth.domain.exception;
 
 import org.springframework.http.HttpStatus;
 

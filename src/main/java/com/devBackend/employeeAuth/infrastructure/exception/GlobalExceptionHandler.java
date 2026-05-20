@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.infrastructure.exception;
+package com.devBackend.employeeAuth.infrastructure.exception;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.devBackend.employAuth.domain.exception.ApplicationException;
+import com.devBackend.employeeAuth.domain.exception.ApplicationException;
 
 import jakarta.servlet.http.HttpServletRequest;
 

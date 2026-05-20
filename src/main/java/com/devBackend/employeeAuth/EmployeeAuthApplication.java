@@ -1,4 +1,4 @@
-package com.devBackend.employAuth;
+package com.devBackend.employeeAuth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

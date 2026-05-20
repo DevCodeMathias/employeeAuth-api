@@ -1,9 +1,9 @@
-package com.devBackend.employAuth.application.security;
+package com.devBackend.employeeAuth.application.security;
 
-import com.devBackend.employAuth.application.interfaces.IJwtService;
-import com.devBackend.employAuth.domain.entity.Employees;
-import com.devBackend.employAuth.domain.types.AuthorizationType;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.application.interfaces.IJwtService;
+import com.devBackend.employeeAuth.domain.entity.Employees;
+import com.devBackend.employeeAuth.domain.types.AuthorizationType;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.slf4j.Logger;

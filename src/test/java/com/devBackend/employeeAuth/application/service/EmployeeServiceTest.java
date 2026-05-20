@@ -1,4 +1,4 @@
-package com.devBackend.employAuth.application.service;
+package com.devBackend.employeeAuth.application.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -7,11 +7,11 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-import com.devBackend.employAuth.application.dto.EmployeeRequest;
-import com.devBackend.employAuth.domain.entity.Employees;
-import com.devBackend.employAuth.domain.exception.EmployeeAlreadyRegisteredException;
-import com.devBackend.employAuth.infrastructure.model.Envelope;
-import com.devBackend.employAuth.infrastructure.repository.EmployeeRepository;
+import com.devBackend.employeeAuth.application.dto.EmployeeRequest;
+import com.devBackend.employeeAuth.domain.entity.Employees;
+import com.devBackend.employeeAuth.domain.exception.EmployeeAlreadyRegisteredException;
+import com.devBackend.employeeAuth.infrastructure.model.Envelope;
+import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
