@@ -12,8 +12,8 @@ import com.devBackend.employeeAuth.application.dto.LoginRequest;
 import com.devBackend.employeeAuth.application.interfaces.IJwtService;
 import com.devBackend.employeeAuth.domain.entity.Employees;
 import com.devBackend.employeeAuth.domain.exception.InvalidCredentialsException;
+import com.devBackend.employeeAuth.domain.repository.IEmployeeRepository;
 import com.devBackend.employeeAuth.infrastructure.model.Envelope;
-import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,7 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 class AuthServiceTest {
 
     @Mock
-    private EmployeeRepository employeeRepository;
+    private IEmployeeRepository employeeRepository;
 
     @Mock
     private PasswordEncoder passwordEncoder;

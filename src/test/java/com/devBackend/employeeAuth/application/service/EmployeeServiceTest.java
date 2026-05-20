@@ -10,8 +10,8 @@ import static org.mockito.Mockito.when;
 import com.devBackend.employeeAuth.application.dto.EmployeeRequest;
 import com.devBackend.employeeAuth.domain.entity.Employees;
 import com.devBackend.employeeAuth.domain.exception.EmployeeAlreadyRegisteredException;
+import com.devBackend.employeeAuth.domain.repository.IEmployeeRepository;
 import com.devBackend.employeeAuth.infrastructure.model.Envelope;
-import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -24,7 +24,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 class EmployeeServiceTest {
 
     @Mock
-    private EmployeeRepository employeeRepository;
+    private IEmployeeRepository employeeRepository;
 
     @Mock
     private PasswordEncoder passwordEncoder;
@@ -39,14 +39,14 @@ class EmployeeServiceTest {
 
         when(employeeRepository.existsByCpf("52998224725")).thenReturn(false);
         when(passwordEncoder.encode("password123")).thenReturn("encoded-password");
-        when(employeeRepository.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
+        when(employeeRepository.save(any())).thenAnswer(invocation -> Envelope.of(invocation.getArgument(0)));
 
         employeeService.create(request);
 
-        ArgumentCaptor<Envelope<Employees>> captor = ArgumentCaptor.forClass(Envelope.class);
+        ArgumentCaptor<Employees> captor = ArgumentCaptor.forClass(Employees.class);
         verify(employeeRepository).save(captor.capture());
 
-        Employees employee = captor.getValue().body();
+        Employees employee = captor.getValue();
         assertEquals("Maria", employee.name);
         assertEquals("52998224725", employee.cpf);
         assertEquals("encoded-password", employee.password);

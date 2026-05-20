@@ -1,6 +1,6 @@
 package com.devBackend.employeeAuth;
 
-import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
+import com.devBackend.employeeAuth.domain.repository.IEmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -15,7 +15,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 class EmployeeAuthApplicationTests {
 
 	@MockitoBean
-	private EmployeeRepository employeeRepository;
+	private IEmployeeRepository employeeRepository;
 
 	@Test
 	void contextLoads() {

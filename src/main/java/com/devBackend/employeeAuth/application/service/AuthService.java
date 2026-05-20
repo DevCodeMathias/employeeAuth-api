@@ -5,7 +5,7 @@ import com.devBackend.employeeAuth.application.dto.TokenResponse;
 import com.devBackend.employeeAuth.application.interfaces.IAuthService;
 import com.devBackend.employeeAuth.application.interfaces.IJwtService;
 import com.devBackend.employeeAuth.domain.exception.InvalidCredentialsException;
-import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
+import com.devBackend.employeeAuth.domain.repository.IEmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,11 +16,11 @@ public class AuthService implements IAuthService {
 
     private static final Logger log = LoggerFactory.getLogger(AuthService.class);
 
-    private final EmployeeRepository employeeRepository;
+    private final IEmployeeRepository employeeRepository;
     private final PasswordEncoder passwordEncoder;
     private final IJwtService jwtService;
 
-    public AuthService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder, IJwtService jwtService) {
+    public AuthService(IEmployeeRepository employeeRepository, PasswordEncoder passwordEncoder, IJwtService jwtService) {
         this.employeeRepository = employeeRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;

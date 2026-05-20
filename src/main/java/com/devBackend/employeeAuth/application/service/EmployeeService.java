@@ -7,8 +7,7 @@ import com.devBackend.employeeAuth.domain.entity.Employees;
 import com.devBackend.employeeAuth.application.interfaces.IEmployeeService;
 import com.devBackend.employeeAuth.application.dto.EmployeeRequest;
 import com.devBackend.employeeAuth.domain.exception.EmployeeAlreadyRegisteredException;
-import com.devBackend.employeeAuth.infrastructure.model.Envelope;
-import com.devBackend.employeeAuth.infrastructure.repository.EmployeeRepository;
+import com.devBackend.employeeAuth.domain.repository.IEmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +16,10 @@ public class EmployeeService implements IEmployeeService {
 
     private static final Logger log = LoggerFactory.getLogger(EmployeeService.class);
 
-    private final EmployeeRepository employeeRepository;
+    private final IEmployeeRepository employeeRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public EmployeeService(EmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
+    public EmployeeService(IEmployeeRepository employeeRepository, PasswordEncoder passwordEncoder) {
         this.employeeRepository = employeeRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -41,7 +40,7 @@ public class EmployeeService implements IEmployeeService {
                 passwordEncoder.encode(request.password())
         );
 
-        Envelope<Employees> savedEmployee = employeeRepository.save(Envelope.of(employee));
+        var savedEmployee = employeeRepository.save(employee);
         log.info("Employee registered successfully employeeId={}", savedEmployee.getId());
     }
 
