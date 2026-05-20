@@ -1,4 +1,4 @@
-package com.devBackend.employeeAuth.application.security;
+package com.devBackend.employeeAuth.infrastructure.security;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

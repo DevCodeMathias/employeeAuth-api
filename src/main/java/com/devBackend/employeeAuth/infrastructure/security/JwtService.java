@@ -1,4 +1,4 @@
-package com.devBackend.employeeAuth.application.security;
+package com.devBackend.employeeAuth.infrastructure.security;
 
 import com.devBackend.employeeAuth.application.interfaces.IJwtService;
 import com.devBackend.employeeAuth.domain.entity.Employees;

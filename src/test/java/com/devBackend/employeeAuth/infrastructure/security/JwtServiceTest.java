@@ -1,4 +1,4 @@
-package com.devBackend.employeeAuth.application.security;
+package com.devBackend.employeeAuth.infrastructure.security;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
