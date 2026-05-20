@@ -18,7 +18,7 @@ class JwtServiceTest {
 
     @Test
     void generateTokenIncludesEmployeeIdAuthorizationTypeAndExpiration() {
-        JwtService jwtService = new JwtService(new JwtProperties(SECRET, 3));
+        JwtService jwtService = new JwtService(new JwtProperties(SECRET, 24));
         Envelope<Employees> employeeEnvelope = new Envelope<>("employee-id", null, null,
                 new Employees("Maria", "52998224725", "encoded-password"));
 
@@ -35,6 +35,6 @@ class JwtServiceTest {
         assertEquals(AuthorizationType.EMPLOYEE.name(), claims.get("authorizationType", String.class));
         assertNotNull(claims.getIssuedAt());
         assertNotNull(claims.getExpiration());
-        assertEquals(10800, jwtService.expiresInSeconds());
+        assertEquals(86400, jwtService.expiresInSeconds());
     }
 }

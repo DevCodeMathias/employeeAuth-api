@@ -7,7 +7,7 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @SpringBootTest(properties = {
 		"security.jwt.secret=test-secret-value-with-at-least-32-chars",
-		"security.jwt.expiration-hours=2",
+		"security.jwt.expiration-hours=24",
 		"spring.autoconfigure.exclude=org.springframework.boot.mongodb.autoconfigure.MongoAutoConfiguration,"
 				+ "org.springframework.boot.data.mongodb.autoconfigure.DataMongoAutoConfiguration,"
 				+ "org.springframework.boot.data.mongodb.autoconfigure.DataMongoRepositoriesAutoConfiguration"
