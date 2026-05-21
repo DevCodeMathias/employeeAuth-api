@@ -74,6 +74,8 @@ Configuracoes atuais:
 spring.application.name=employeeAuth
 server.port=8081
 logging.level.com.devBackend.employeeAuth=${APP_LOG_LEVEL:INFO}
+spring.mvc.throw-exception-if-no-handler-found=true
+spring.web.resources.add-mappings=false
 
 spring.mongodb.uri=<mongodb-uri>
 mongodb.collections.employees=employessCollection
@@ -93,6 +95,13 @@ Variaveis que podem ser externalizadas:
 | `security.jwt.expiration-hours` | Duracao do token em horas | `24` |
 
 Recomendacao: em ambientes reais, nao deixe URI de banco e segredo JWT versionados. Use variaveis de ambiente ou configuracao externa.
+
+As propriedades abaixo fazem rotas inexistentes cairem no `GlobalExceptionHandler`, retornando erro JSON padronizado:
+
+```properties
+spring.mvc.throw-exception-if-no-handler-found=true
+spring.web.resources.add-mappings=false
+```
 
 ## Como executar
 
@@ -156,12 +165,18 @@ A aplicacao sobe em:
 http://localhost:8081
 ```
 
+A base atual da API e:
+
+```text
+http://localhost:8081/api/v1
+```
+
 ### 4. Validar se subiu
 
 Depois que o terminal indicar que a aplicacao iniciou, teste:
 
 ```bash
-curl http://localhost:8081/api/employees/healthcheck
+curl http://localhost:8081/api/v1/employees/healthcheck
 ```
 
 Resposta esperada:
@@ -189,7 +204,7 @@ Em Linux/macOS:
 ### Healthcheck
 
 ```http
-GET /api/employees/healthcheck
+GET /api/v1/employees/healthcheck
 ```
 
 Resposta:
@@ -201,7 +216,7 @@ OK
 ### Cadastro de funcionario
 
 ```http
-POST /api/employees/register
+POST /api/v1/employees/register
 Content-Type: application/json
 ```
 
@@ -235,11 +250,12 @@ Possiveis erros:
 
 - `400 VALIDATION_ERROR`: dados invalidos
 - `409 EMPLOYEE_ALREADY_REGISTERED`: CPF ja cadastrado
+- `404 ROUTE_NOT_FOUND`: rota inexistente
 
 ### Login
 
 ```http
-POST /api/auth/login
+POST /api/v1/auth/login
 Content-Type: application/json
 ```
 
@@ -266,6 +282,7 @@ Possiveis erros:
 
 - `400 VALIDATION_ERROR`: dados invalidos
 - `401 INVALID_CREDENTIALS`: CPF ou senha invalidos
+- `404 ROUTE_NOT_FOUND`: rota inexistente
 
 ## Formato de erro
 
@@ -278,10 +295,30 @@ Erros sao retornados no formato:
   "error": "Bad Request",
   "code": "VALIDATION_ERROR",
   "message": "Request validation failed",
-  "path": "/api/auth/login",
+  "path": "/api/v1/auth/login",
   "fields": {
     "cpf": "cpf must be a valid CPF document"
   }
+}
+```
+
+### Rota nao encontrada
+
+Quando uma rota nao existe, a API retorna:
+
+```http
+404 Not Found
+```
+
+```json
+{
+  "timestamp": "2026-05-21T19:00:00",
+  "status": 404,
+  "error": "Not Found",
+  "code": "ROUTE_NOT_FOUND",
+  "message": "Route not found",
+  "path": "/api/v1/unknown",
+  "fields": null
 }
 ```
 
@@ -290,7 +327,7 @@ Erros sao retornados no formato:
 ### 1. Healthcheck
 
 ```bash
-curl http://localhost:8081/api/employees/healthcheck
+curl http://localhost:8081/api/v1/employees/healthcheck
 ```
 
 Resposta esperada:
@@ -304,7 +341,7 @@ OK
 O CPF precisa ser valido e a senha deve ter pelo menos 8 caracteres.
 
 ```bash
-curl -X POST http://localhost:8081/api/employees/register \
+curl -X POST http://localhost:8081/api/v1/employees/register \
   -H "Content-Type: application/json" \
   -d '{"name":"Maria","cpf":"52998224725","password":"password123"}'
 ```
@@ -320,7 +357,7 @@ Se o CPF ja existir, a API retorna `409 EMPLOYEE_ALREADY_REGISTERED`.
 ### 3. Fazer login
 
 ```bash
-curl -X POST http://localhost:8081/api/auth/login \
+curl -X POST http://localhost:8081/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"cpf":"52998224725","password":"password123"}'
 ```
@@ -340,7 +377,7 @@ Esse token expira em 24 horas.
 Em Linux/macOS:
 
 ```bash
-TOKEN=$(curl -s -X POST http://localhost:8081/api/auth/login \
+TOKEN=$(curl -s -X POST http://localhost:8081/api/v1/auth/login \
   -H "Content-Type: application/json" \
   -d '{"cpf":"52998224725","password":"password123"}' \
   | jq -r '.accessToken')
@@ -350,7 +387,7 @@ No Windows PowerShell:
 
 ```powershell
 $response = Invoke-RestMethod -Method Post `
-  -Uri "http://localhost:8081/api/auth/login" `
+  -Uri "http://localhost:8081/api/v1/auth/login" `
   -ContentType "application/json" `
   -Body '{"cpf":"52998224725","password":"password123"}'
 
@@ -361,6 +398,22 @@ Atualmente as rotas existentes sao publicas ou negadas por configuracao. Quando 
 
 ```http
 Authorization: Bearer <token>
+```
+
+### 5. Testar rota inexistente
+
+```bash
+curl -i http://localhost:8081/api/v1/unknown
+```
+
+Resposta esperada:
+
+```json
+{
+  "code": "ROUTE_NOT_FOUND",
+  "message": "Route not found",
+  "path": "/api/v1/unknown"
+}
 ```
 
 ## Observacoes de seguranca

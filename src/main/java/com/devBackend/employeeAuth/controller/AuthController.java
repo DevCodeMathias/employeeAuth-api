@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.devBackend.employeeAuth.application.interfaces.IAuthService;
 import com.devBackend.employeeAuth.application.dto.LoginRequest;
 import com.devBackend.employeeAuth.application.dto.TokenResponse;
-import com.devBackend.employeeAuth.infrastructure.model.Envelope;
 
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthController {
 
     private final IAuthService authService;

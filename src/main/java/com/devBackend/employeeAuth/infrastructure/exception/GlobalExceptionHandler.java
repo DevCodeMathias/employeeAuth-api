@@ -12,6 +12,8 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.devBackend.employeeAuth.domain.exception.ApplicationException;
 
@@ -75,6 +77,22 @@ public class GlobalExceptionHandler {
                 HttpStatus.BAD_REQUEST,
                 "INVALID_REQUEST_BODY",
                 "Request body is invalid or malformed",
+                request.getRequestURI(),
+                null
+        );
+    }
+
+    @ExceptionHandler({NoHandlerFoundException.class, NoResourceFoundException.class})
+    public ResponseEntity<ErrorResponse> handleRouteNotFoundException(
+            Exception exception,
+            HttpServletRequest request
+    ) {
+        log.warn("Route not found handled path={}", request.getRequestURI());
+
+        return buildResponse(
+                HttpStatus.NOT_FOUND,
+                "ROUTE_NOT_FOUND",
+                "Route not found",
                 request.getRequestURI(),
                 null
         );
