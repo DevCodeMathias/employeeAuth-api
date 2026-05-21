@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
-@Document(collection = "${mongodb.collections.envelopes}")
+@Document(collection = "${mongodb.collections.employees}")
 public class Envelope<T> {
 
     @Id
