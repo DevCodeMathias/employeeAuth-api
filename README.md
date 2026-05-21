@@ -96,10 +96,47 @@ Recomendacao: em ambientes reais, nao deixe URI de banco e segredo JWT versionad
 
 ## Como executar
 
-Pre-requisitos:
+### Pre-requisitos
 
 - Java 17 instalado
 - Acesso ao MongoDB configurado em `spring.mongodb.uri`
+- Porta `8081` livre
+
+### 1. Conferir configuracao
+
+Antes de subir a aplicacao, confira o arquivo:
+
+```text
+src/main/resources/application.properties
+```
+
+As configuracoes minimas para execucao local sao:
+
+```properties
+server.port=8081
+spring.mongodb.uri=<sua-uri-do-mongodb>
+mongodb.collections.employees=employessCollection
+security.jwt.secret=<uma-chave-com-pelo-menos-32-caracteres>
+security.jwt.expiration-hours=24
+```
+
+O projeto ja possui valores configurados nesse arquivo, entao basta ajustar se voce quiser usar outro banco, outra collection ou outro segredo JWT.
+
+### 2. Rodar os testes
+
+No Windows PowerShell:
+
+```powershell
+.\mvnw.cmd test
+```
+
+Em Linux/macOS:
+
+```bash
+./mvnw test
+```
+
+### 3. Subir a aplicacao
 
 No Windows PowerShell:
 
@@ -117,6 +154,20 @@ A aplicacao sobe em:
 
 ```text
 http://localhost:8081
+```
+
+### 4. Validar se subiu
+
+Depois que o terminal indicar que a aplicacao iniciou, teste:
+
+```bash
+curl http://localhost:8081/api/employees/healthcheck
+```
+
+Resposta esperada:
+
+```text
+OK
 ```
 
 ## Como rodar os testes
@@ -236,13 +287,21 @@ Erros sao retornados no formato:
 
 ## Exemplos com curl
 
-Healthcheck:
+### 1. Healthcheck
 
 ```bash
 curl http://localhost:8081/api/employees/healthcheck
 ```
 
-Cadastro:
+Resposta esperada:
+
+```text
+OK
+```
+
+### 2. Cadastrar funcionario
+
+O CPF precisa ser valido e a senha deve ter pelo menos 8 caracteres.
 
 ```bash
 curl -X POST http://localhost:8081/api/employees/register \
@@ -250,12 +309,58 @@ curl -X POST http://localhost:8081/api/employees/register \
   -d '{"name":"Maria","cpf":"52998224725","password":"password123"}'
 ```
 
-Login:
+Resposta esperada:
+
+```text
+usuario criado com sucesso
+```
+
+Se o CPF ja existir, a API retorna `409 EMPLOYEE_ALREADY_REGISTERED`.
+
+### 3. Fazer login
 
 ```bash
 curl -X POST http://localhost:8081/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"cpf":"52998224725","password":"password123"}'
+```
+
+Resposta esperada:
+
+```json
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiJ9..."
+}
+```
+
+Esse token expira em 24 horas.
+
+### 4. Exemplo com token em variavel
+
+Em Linux/macOS:
+
+```bash
+TOKEN=$(curl -s -X POST http://localhost:8081/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"cpf":"52998224725","password":"password123"}' \
+  | jq -r '.accessToken')
+```
+
+No Windows PowerShell:
+
+```powershell
+$response = Invoke-RestMethod -Method Post `
+  -Uri "http://localhost:8081/api/auth/login" `
+  -ContentType "application/json" `
+  -Body '{"cpf":"52998224725","password":"password123"}'
+
+$token = $response.accessToken
+```
+
+Atualmente as rotas existentes sao publicas ou negadas por configuracao. Quando novas rotas protegidas forem adicionadas, use o token no header:
+
+```http
+Authorization: Bearer <token>
 ```
 
 ## Observacoes de seguranca
