@@ -14,7 +14,7 @@ import com.devBackend.employeeAuth.application.interfaces.IEmployeeService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/employees")
+@RequestMapping("/api/v1/employees")
 public class EmployeeController {
 
     private final IEmployeeService employeeService;
