@@ -233,7 +233,7 @@ Body:
 Validacoes:
 
 - `name`: obrigatorio
-- `cpf`: obrigatorio e deve ser CPF valido
+- `cpf`: obrigatorio, deve conter exatamente 11 digitos e nao deve usar pontos ou traco
 - `password`: obrigatoria e deve ter no minimo 8 caracteres
 
 Resposta de sucesso:
@@ -297,7 +297,7 @@ Erros sao retornados no formato:
   "message": "Request validation failed",
   "path": "/api/v1/auth/login",
   "fields": {
-    "cpf": "cpf must be a valid CPF document"
+    "cpf": "cpf must contain exactly 11 digits without dots or hyphen"
   }
 }
 ```
@@ -338,7 +338,7 @@ OK
 
 ### 2. Cadastrar funcionario
 
-O CPF precisa ser valido e a senha deve ter pelo menos 8 caracteres.
+O CPF precisa ser valido, deve ser enviado somente com 11 digitos, sem pontos ou traco, e a senha deve ter pelo menos 8 caracteres.
 
 ```bash
 curl -X POST http://localhost:8081/api/v1/employees/register \
@@ -394,7 +394,7 @@ $response = Invoke-RestMethod -Method Post `
 $token = $response.accessToken
 ```
 
-Atualmente as rotas existentes sao publicas ou negadas por configuracao. Quando novas rotas protegidas forem adicionadas, use o token no header:
+Atualmente as rotas existentes sao publicas, e a configuracao de seguranca nao exige autenticacao para outras rotas (`anyRequest().permitAll()`). Rotas inexistentes ainda retornam `404 ROUTE_NOT_FOUND` pelo tratamento global de erros. Quando novas rotas protegidas forem adicionadas, ajuste a configuracao de seguranca e use o token no header:
 
 ```http
 Authorization: Bearer <token>
@@ -421,5 +421,5 @@ Resposta esperada:
 - A senha do funcionario e criptografada com `BCryptPasswordEncoder`.
 - O JWT e assinado com a chave `security.jwt.secret`.
 - A aplicacao esta configurada como stateless.
-- Atualmente apenas cadastro, login e healthcheck sao permitidos; demais rotas sao negadas.
+- Atualmente cadastro, login e healthcheck sao publicos. A configuracao atual tambem permite qualquer outra rota mapeada, pois usa `anyRequest().permitAll()`.
 - Para producao, configure segredos fora do repositorio.
